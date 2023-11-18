@@ -1,7 +1,7 @@
 const exress = require("express");
-const { create, update, register } = require("../controllers/CourseApi");
+const { add } = require("../controllers/CommentApi");
 
 const router = exress.Router();
 
-router.post("/add/:lead_id", create);
+router.post("/add/:lead_id", add);
 module.exports = router;

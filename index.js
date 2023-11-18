@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const courses = require("./routes/CourseRoute");
 const instructor = require("./routes/InstructorRoute");
+const comment = require("./routes/CommentRoute");
 
 // Load environment variables from .env file
 require("dotenv").config({
