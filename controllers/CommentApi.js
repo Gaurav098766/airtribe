@@ -1,4 +1,4 @@
-const { pool } = require("../config/db");
+const pool = require("../config/db");
 
 exports.add = async (req, res) => {
   try {
