@@ -2,7 +2,9 @@
 const { Pool } = require('pg');
 
 // Load environment variables from the .env file
-require('dotenv').config();
+require('dotenv').config({
+    path:"./config/config.env"
+});
 
 // Define the database configuration using environment variables
 const dbConfig = {
@@ -14,10 +16,10 @@ const dbConfig = {
 };
 
 // Create a new connection pool using the defined configuration
-const connection = new Pool(dbConfig);
+const pool = new Pool(dbConfig);
 
 // Attempt to connect to the database
-connection.connect((err) => {
+pool.connect((err) => {
     if (err) {
         // Log an error message if there's an issue connecting to the database
         console.error('Error connecting to the database:', err.stack);
@@ -28,4 +30,4 @@ connection.connect((err) => {
 });
 
 // Export the connection pool for use in other parts of the application
-module.exports = { connection };
+module.exports = { pool };

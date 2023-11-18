@@ -1,9 +1,12 @@
 // Import required modules
 const express = require('express');
 const bodyParser = require('body-parser');
+const courses = require('./routes/CourseRoute')
 
 // Load environment variables from .env file
-require('dotenv').config();
+require('dotenv').config({
+    path:"./config/config.env"
+});
 
 // Connect to the database
 require('./config/db');
@@ -17,6 +20,10 @@ const port = process.env.PORT_SERVER;
 // Middleware for parsing request bodies
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// Mount Routers
+app.use('/api/v1/courses',courses);
+
 
 // Start the Express server
 app.listen(port, () => {
