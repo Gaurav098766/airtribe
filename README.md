@@ -25,7 +25,7 @@ To seed test data in database container
     POST/api/v1/courses/create
     POST/api/v1/courses/register/:course_id
     POST/api/v1/comment/add/:lead_id
-    PATCH/api/v1/courses/update/1/course/:instructor_id
+    PATCH/api/v1/courses/update/:instructor_id/course/:course_id
     PATCH/api/v1/instructor/update/:lead_id
 
 # Environment Variables
