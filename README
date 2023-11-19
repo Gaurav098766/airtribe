@@ -1,2 +1,0 @@
-docker-compose up
-docker exec -it airtribe-postgres-1 psql -U user -d database -a -f /var/script
