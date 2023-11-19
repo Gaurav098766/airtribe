@@ -3,6 +3,7 @@
 Run the following command on your local environment to clone the repository
 
     git clone https://github.com/Gaurav098766/airtribe.git
+    cd airtribe
 
 To spin up docker container for server and database
 
