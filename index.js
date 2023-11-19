@@ -6,22 +6,26 @@ const instructor = require("./routes/InstructorRoute");
 const comment = require("./routes/CommentRoute");
 
 // Load environment variables from .env file
-require("dotenv").config({
-  path: "./config/config.env",
-});
+require("dotenv").config();
 
 // Connect to the database
 require("./config/db");
+// require("./config/db.seed");s
 
 // Create an instance of the Express application
 const app = express();
 
 // Define the port for the server to listen on
-const port = process.env.PORT_SERVER;
+const port = process.env.SERVER_PORT;
 
 // Middleware for parsing request bodies
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// To check server status
+app.get("/", (req, res) => {
+  res.send("Health Check... Status OK");
+});
 
 // Mount Routers
 app.use("/api/v1/courses", courses);

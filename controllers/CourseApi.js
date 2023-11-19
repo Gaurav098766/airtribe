@@ -101,9 +101,29 @@ exports.update = async (req, res, next) => {
 
 // // Course registration API (A user can apply for a course by sharing their name, email, phone number and LinkedIn profile)
 exports.register = async (req, res) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const linkedinRegex =
+    /^https?:\/\/((www|ww)\.)?linkedin\.com\/((in\/[^/]+\/?)|(pub\/[^/]+\/((w|d)+\/?){3}))$/;
+
   try {
     const { course_id } = req.params;
     const { name, email, phone_number, linkedin_profile } = req.body;
+
+    // Validatin Email Format
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid Email Format",
+      });
+    }
+
+    // Validating Linkedin URL
+    if (!linkedinRegex.test(linkedin_profile)) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid Linkedin URL",
+      });
+    }
 
     let query =
       "INSERT INTO leads (course_id, name, email, phone_number, linkedin_profile, status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *";
@@ -117,6 +137,7 @@ exports.register = async (req, res) => {
     ];
 
     const result = await pool.query(query, values);
+
     return res.status(201).json({
       success: true,
       data: result.rows[0],

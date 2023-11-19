@@ -1,0 +1,39 @@
+CREATE TABLE instructors (
+  instructor_id SERIAL PRIMARY KEY,
+  name VARCHAR(25) NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE courses(
+     course_id SERIAL PRIMARY KEY,
+     instructor_id INTEGER NOT NULL REFERENCES instructors(instructor_id),
+     title VARCHAR(255) NOT NULL,
+     description TEXT,
+     max_seats INTEGER NOT NULL,
+     start_date DATE NOT NULL,
+     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TYPE lead_status as ENUM ('Accept', 'Reject', 'Waitlist');
+
+CREATE TABLE leads(
+     lead_id SERIAL PRIMARY KEY,
+     course_id INTEGER NOT NULL REFERENCES courses(course_id),
+     name VARCHAR(25) NOT NULL,
+     email VARCHAR(255) NOT NULL,
+     phone_number VARCHAR(20) NOT NULL,
+     linkedin_profile VARCHAR(255) NOT NULL,
+     status lead_status NOT NULL,
+     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE comments(
+     comment_id SERIAL PRIMARY KEY,
+     instructor_id INTEGER NOT NULL REFERENCES instructors(instructor_id),
+     lead_id INTEGER NOT NULL REFERENCES leads(lead_id),
+     comment_text TEXT NOT NULL,
+     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO instructors (name) VALUES ('Gaurav');
+INSERT INTO instructors (name) VALUES ('Aditya');
