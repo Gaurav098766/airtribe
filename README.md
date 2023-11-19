@@ -12,8 +12,9 @@ To spin up docker container for server and database
 > **Note:** For mac/linux based users *docker compose up* .
  
 To seed test data in database container 
-
+    
     docker  exec  -it  airtribe-postgres-1  psql  -U  user  -d  database  -a  -f  /var/script
+> **Note:** Create a new terminal and do *cd airtribe*.
 
 ## Requirements
 - Docker Desktop
